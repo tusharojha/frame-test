@@ -19,3 +19,106 @@
     color: #181818;
   }
 }
+
+/* Farcaster-inspired colorful theme */
+.fc-app-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6f47ff 0%, #a6e1fa 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+.fc-card {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(111, 71, 255, 0.12);
+  padding: 32px 24px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fc-profile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.fc-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6f47ff 60%, #a6e1fa 100%);
+  border: 3px solid #e6e6fa;
+}
+
+.fc-username {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #6f47ff;
+}
+
+.fc-wallet {
+  font-size: 0.95rem;
+  color: #888;
+}
+
+.fc-airdrop-card {
+  background: #f3f0ff;
+  border: 2px solid #a6e1fa;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #6f47ff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fc-airdrop-title {
+  font-weight: 700;
+}
+
+.fc-airdrop-token {
+  color: #00bcd4;
+  font-weight: 700;
+}
+
+.fc-idea-card {
+  background: #f8fafd;
+  border-radius: 12px;
+  padding: 16px 14px 12px 14px;
+  margin-bottom: 6px;
+  box-shadow: 0 2px 8px rgba(166, 225, 250, 0.08);
+}
+
+.fc-idea-text {
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.fc-vote-bar {
+  display: flex;
+  height: 18px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #e6e6fa;
+  border: 1.5px solid #a6e1fa;
+}
+
+.fc-vote-bar-support {
+  background: linear-gradient(90deg, #6f47ff 60%, #00bcd4 100%);
+  transition: width 0.4s;
+}
+
+.fc-vote-bar-oppose {
+  background: #ffb3b3;
+  transition: width 0.4s;
+}

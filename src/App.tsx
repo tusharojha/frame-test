@@ -1,38 +1,62 @@
-import { sdk } from "@farcaster/frame-sdk";
 import { useEffect, useState } from "react";
+import { sdk } from "@farcaster/frame-sdk";
 import { useAccount, useConnect, useSignTypedData } from "wagmi";
 import { ApiPromise, Keyring, WsProvider } from '@polkadot/api';
 import { keccakAsHex } from '@polkadot/util-crypto';
+import type { Context } from '@farcaster/frame-core';
+import "./index.css";
 
 const keyring = new Keyring({ type: 'sr25519' });
 
-// for sdk.context --->  export type FrameContext = {
-//   user: {
-//     fid: number;
-//     username?: string;
-//     displayName?: string;
-//     pfpUrl?: string;
-//   };
-//   location?: FrameLocationContext;
-//   client: {
-//     clientFid: number;
-//     added: boolean;
-//     safeAreaInsets?: SafeAreaInsets;
-//     notificationDetails?: FrameNotificationDetails;
-//   };
-// };
-//
-
 function App() {
+  const [frameCtx, setFrameCtx] = useState<Context.FrameContext>();
+
   useEffect(() => {
-    sdk.actions.ready();
+    const getCtx = async () => {
+      const ctx = await sdk.context;
+      setFrameCtx(ctx);
+    }
+
+    getCtx().then(() => sdk.actions.ready());
   }, []);
 
   return (
-    <>
-      <div>Mini App + Vite + TS + React + Wagmi</div>
-      <ConnectMenu />
-    </>
+    <div className="fc-app-bg">
+      <div className="fc-card">
+        <UserProfile frameCtx={frameCtx} />
+        <ConnectMenu />
+        <AirdropCard />
+        <ForumIdeaCard
+          user="A"
+          text="Great work from A"
+          support={0.7}
+        />
+        <ForumIdeaCard
+          user="B"
+          text="Do people want my idea - could be forum or something new??"
+          support={0.4}
+        />
+        <ForumIdeaCard
+          user="C"
+          text="Great work from C"
+          support={0.9}
+        />
+      </div>
+    </div>
+  );
+}
+
+function UserProfile({ frameCtx }: { readonly frameCtx?: Context.FrameContext }) {
+  const { isConnected, address } = useAccount();
+
+  return (
+    <div className="fc-profile">
+      <div className="fc-avatar" />
+      <div>
+        <div className="fc-username">{frameCtx?.user.displayName}</div>
+        <div className="fc-wallet">{isConnected ? address : "wallet addr"}</div>
+      </div>
+    </div>
   );
 }
 
@@ -157,6 +181,26 @@ function SignButton() {
         </>
       )}
     </>
+  );
+}
+
+function AirdropCard() {
+  return (
+    <div className="fc-airdrop-card">
+      <span className="fc-airdrop-title">Token Airdrop:</span> <span className="fc-airdrop-token">$GG FORUM Idea</span>
+    </div>
+  );
+}
+
+function ForumIdeaCard({ text, support }: { user: string; text: string; support: number }) {
+  return (
+    <div className="fc-idea-card">
+      <div className="fc-idea-text">{text}</div>
+      <div className="fc-vote-bar">
+        <div className="fc-vote-bar-support" style={{ width: `${support * 100}%` }} />
+        <div className="fc-vote-bar-oppose" style={{ width: `${(1 - support) * 100}%` }} />
+      </div>
+    </div>
   );
 }
 
