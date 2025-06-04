@@ -1,6 +1,6 @@
 import { sdk } from "@farcaster/frame-sdk";
 import { useEffect, useState } from "react";
-import { useAccount, useConnect, useSignMessage, useSignTypedData } from "wagmi";
+import { useAccount, useConnect, useSignTypedData } from "wagmi";
 import { ApiPromise, Keyring, WsProvider } from '@polkadot/api';
 import { keccakAsHex } from '@polkadot/util-crypto';
 
